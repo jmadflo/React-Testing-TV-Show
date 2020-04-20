@@ -2,6 +2,7 @@ import React from 'react'
 import { render, wait, fireEvent } from '@testing-library/react'
 import { fetchShow as mockFetchShow } from './api/fetchShow'
 import App from './App'
+
 jest.mock('./api/fetchShow')
 
 // js object literal version of the originally json format data
@@ -637,9 +638,30 @@ test("User can select a season and the season's episodes render as predicted", a
     // all four seasons plus the default select season option appear
     expect(getAllByText(/season/i)).toHaveLength(5)
 
-    // select season 3
+    // select season 1
+    fireEvent.mouseDown(getByText(/season 1/i))
+
+    // eight episodes render
+    expect(getAllByText(/episode/i)).toHaveLength(8)
+
+    // change to season 2
+    fireEvent.mouseDown(getAllByText(/season 1/i)[0])
+    fireEvent.mouseDown(getByText(/season 2/i))
+
+    // nine episodes render
+    expect(getAllByText(/episode/i)).toHaveLength(9)
+
+    // change to season 3
+    fireEvent.mouseDown(getAllByText(/season 2/i)[0])
     fireEvent.mouseDown(getByText(/season 3/i))
 
     // eight episodes render
     expect(getAllByText(/episode/i)).toHaveLength(8)
+
+    // change to season 3
+    fireEvent.mouseDown(getAllByText(/season 3/i)[0])
+    fireEvent.mouseDown(getByText(/season 4/i))
+
+    // one episode renders
+    expect(getAllByText(/episode/i)).toHaveLength(1)
 })
