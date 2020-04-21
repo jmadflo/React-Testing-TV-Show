@@ -554,10 +554,13 @@ test('Component renders with empty array at first and rerenders with show episod
     const { rerender, queryByTestId, getAllByText } = render(<Episodes episodes={[]}/>)
     
     // Make sure episode list does not have innerHTML
-    expect(queryByTestId(/episodes/i)).not.toContainHTML()
+    expect(queryByTestId('episodes')).not.toHaveTextContent('Chapter One: The Vanishing of Will Byers')
 
     // Rerender with new value for episodes prop. It should contain the 26 episodes above.
     rerender(<Episodes episodes={showEpisodes}/>)
+
+    // expect(queryByTestId(/episodes/i)).toContainHTML(<div data-testid="episode"></div>)
+    expect(queryByTestId('episodes')).toHaveTextContent('Chapter One: The Vanishing of Will Byers')
 
     // Verify that the number of episodes equals 26 as expected after the rerender.
     expect(getAllByText(/episode/i)).toHaveLength(26)
