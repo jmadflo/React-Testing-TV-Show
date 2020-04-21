@@ -644,12 +644,18 @@ test("User can select a season and the season's episodes render as predicted", a
     // eight episodes render
     expect(getAllByText(/episode/i)).toHaveLength(8)
 
+    // first episode of season has correct title
+    expect(getByText(/chapter one/i)).toHaveTextContent(/the vanishing of will byers/i)
+
     // change to season 2
     fireEvent.mouseDown(getAllByText(/season 1/i)[0])
     fireEvent.mouseDown(getByText(/season 2/i))
 
     // nine episodes render
     expect(getAllByText(/episode/i)).toHaveLength(9)
+
+    // first episode of season has correct title
+    expect(getByText(/chapter one/i)).toHaveTextContent(/madmax/i)
 
     // change to season 3
     fireEvent.mouseDown(getAllByText(/season 2/i)[0])
@@ -658,9 +664,15 @@ test("User can select a season and the season's episodes render as predicted", a
     // eight episodes render
     expect(getAllByText(/episode/i)).toHaveLength(8)
 
-    // change to season 3
+    // first episode of season has correct title
+    expect(getByText(/chapter one/i)).toHaveTextContent(/suzie, do you copy/i)
+
+    // change to season 4
     fireEvent.mouseDown(getAllByText(/season 3/i)[0])
     fireEvent.mouseDown(getByText(/season 4/i))
+
+    // first episode of season has correct title
+    expect(getByText(/chapter one/i)).toHaveTextContent(/the hellfire club/i)
 
     // one episode renders
     expect(getAllByText(/episode/i)).toHaveLength(1)
