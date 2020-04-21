@@ -1,9 +1,9 @@
-import React from 'react';
-import parse from 'html-react-parser';
+import React from 'react'
+import parse from 'html-react-parser'
 
 export default function Episodes(props) {
   return (
-    <div className="episodes">
+    <div data-testid="episodes" className="episodes">
       {props.episodes.map(e => (
         <div className="episode" key={e.id}>
           {e.image && (
@@ -21,5 +21,5 @@ export default function Episodes(props) {
         </div>
       ))}
     </div>
-  );
+  )
 }
